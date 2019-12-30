@@ -17,8 +17,8 @@ import java.util.Arrays;
 public final class ADPCMCodec extends AudioCodec
 {
     static int[] indexTable = {
-        -1, -1, -1, -1, 2, 4, 6, 8,
-        -1, -1, -1, -1, 2, 4, 6, 8
+            -1, -1, -1, -1, 2, 4, 6, 8,
+            -1, -1, -1, -1, 2, 4, 6, 8
     };
 
     static int[] stepsizeTable = {
@@ -164,7 +164,7 @@ public final class ADPCMCodec extends AudioCodec
             if ( bufferstep != 0 ) {
                 outputbuffer = (delta << 4) & 0xf0;
             } else {
-	            outp[k++] = (byte)((delta & 0x0f) | outputbuffer);
+                outp[k++] = (byte)((delta & 0x0f) | outputbuffer);
             }
             bufferstep = bufferstep == 0 ? 1 : 0;
         }
@@ -181,7 +181,7 @@ public final class ADPCMCodec extends AudioCodec
     public static void adpcm_decoder(byte[] indata, short[] outdata, int len, State state)
     {
         // signed char *inp;		/* Input buffer pointer */
-	    // short *outp;		/* output buffer pointer */
+        // short *outp;		/* output buffer pointer */
         int sign;			/* Current adpcm sign bit */
         int delta;			/* Current adpcm output value */
         int step;			/* Stepsize */
@@ -248,7 +248,7 @@ public final class ADPCMCodec extends AudioCodec
             step = stepsizeTable[index];
 
 		/* Step 7 - Output value */
-		    outp[k++] = (short)valpred;
+            outp[k++] = (short)valpred;
         }
 
         state.valprev = (short)valpred;

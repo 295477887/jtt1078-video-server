@@ -15,7 +15,12 @@ public final class ByteUtils
 
     public static synchronized void dump(byte[] data)
     {
-        for (int i = 0, l = data.length; i < l; )
+        dump(data, data.length);
+    }
+
+    public static synchronized void dump(byte[] data, int len)
+    {
+        for (int i = 0, l = len; i < l; )
         {
             String ascii = "";
             int k = 0, f = 0;
@@ -79,6 +84,24 @@ public final class ByteUtils
         byte[] ret = new byte[4];
         for (int i = 0; i < 4; i++) ret[i] = bytes[3 - i];
         return toInt(ret);
+    }
+
+    public static byte[] toLEBytes(int val)
+    {
+        byte[] bytes = new byte[4];
+        for (int i = 0; i < 4; i++)
+        {
+            bytes[3 - i] = (byte)(val >> ((3 - i) * 8) & 0xff);
+        }
+        return bytes;
+    }
+
+    public static byte[] toLEBytes(short s)
+    {
+        byte[] bytes = new byte[2];
+        bytes[0] = (byte)(s & 0xff);
+        bytes[1] = (byte)((s >> 8) & 0xff);
+        return bytes;
     }
 
     public static int toInt(byte[] bytes)
@@ -146,5 +169,28 @@ public final class ByteUtils
         for (int i = 0; i < data1.length; i++)
             if ((data1[i] & 0xff) != (data2[i] & 0xff)) return false;
         return true;
+    }
+
+    // 相当于(short *) byte_pointer的效果
+    public static short[] toShortArray(byte[] src)
+    {
+        short[] dst = new short[src.length / 2];
+        for (int i = 0, k = 0; i < src.length; )
+        {
+            dst[k++] = (short)((src[i++] & 0xff) | ((src[i++] & 0xff) << 8));
+        }
+        return dst;
+    }
+
+    // 相当于(char *) short_pointer的效果
+    public static byte[] toByteArray(short[] src)
+    {
+        byte[] dst = new byte[src.length * 2];
+        for (int i = 0, k = 0; i < src.length; i++)
+        {
+            dst[k++] = (byte)(src[i] & 0xff);
+            dst[k++] = (byte)((src[i] >> 8) & 0xff);
+        }
+        return dst;
     }
 }
