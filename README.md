@@ -55,7 +55,7 @@
 ffmpeg的输入端，可以是stdin、网络流、文件（图片或视频）等几乎所有常见的数据来源，也可以是同时多个输入，功能非常强大，我之前一直使用的是FIFO命名管道，现在可以抛弃对FIFO命名管道的依赖了，并且可以真正的跨平台运行了。
 
 ### 准备工具
-1. 安装了`ffmpeg`的机器一台
+1. 安装了`ffmpeg`（测试用版本n4.1.5）的机器一台
 2. 安装了`nginx-rtmp-module`或`nginx-http-flv-module`（推荐）的`Nginx`服务器，用于实时视频的转播
 3. `PotPlayer`，可用于播放实时转播的`RTMP`视频
 4. 项目里准备了一个测试程序（`src/main/java/cn.org.hentai.jtt1078.test.VideoPushTest.java`），以及一个数据文件（`src/main/resources/tcpdump.bin`），数据文件是通过工具采集的一段几分钟时长的车载终端发送上来的原始消息包，测试程序可以持续不断的、慢慢的发送数据文件里的内容，用来模拟车载终端发送视频流的过程。

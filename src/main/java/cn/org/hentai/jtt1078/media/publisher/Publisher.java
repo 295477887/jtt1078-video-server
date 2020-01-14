@@ -45,12 +45,10 @@ public class Publisher
         String audioFifoPath = mkfifo();
 
         process = Runtime.getRuntime().exec(
-                String.format("%s -loglevel debug -f h264 -i %s -f s16le -ar 8000 -ac 1 -i %s -vcodec copy -acodec aac -strict -2 "
-                                + " -map 0:v:0 -map 1:a:0 -probesize 512 -analyzeduration 100 -f flv %s",
-                                Configs.get("ffmpeg.path"),
-                                videoFifoPath,
-                                audioFifoPath,
-                                rtmpURL
+                        String.format(Configs.get("ffmpeg.command.pattern"),
+                        Configs.get("ffmpeg.path"),
+                        audioFifoPath,
+                        rtmpURL
                 )
         );
 
