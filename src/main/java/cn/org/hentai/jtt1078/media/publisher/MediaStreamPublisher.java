@@ -4,6 +4,7 @@ import cn.org.hentai.jtt1078.media.Media;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.LinkedList;
@@ -112,7 +113,7 @@ public abstract class MediaStreamPublisher extends Thread
             }
         }
         catch(Exception e) { }
-
+        new File(this.fifoPath).delete();
         try { if (output != null) output.close(); } catch(Exception e) { }
     }
 
