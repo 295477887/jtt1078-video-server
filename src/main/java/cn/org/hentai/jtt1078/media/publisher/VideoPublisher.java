@@ -13,6 +13,7 @@ public class VideoPublisher extends MediaStreamPublisher
     public VideoPublisher(long channel, String tag, Process process)
     {
         super(channel, tag, process);
+        this.output = process.getOutputStream();
     }
 
     @Override
