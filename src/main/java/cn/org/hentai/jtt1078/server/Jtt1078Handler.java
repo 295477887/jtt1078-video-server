@@ -80,6 +80,7 @@ public class Jtt1078Handler extends SimpleChannelInboundHandler<Packet>
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception
     {
+        release(ctx);
         super.channelInactive(ctx);
     }
 
@@ -94,6 +95,12 @@ public class Jtt1078Handler extends SimpleChannelInboundHandler<Packet>
         // super.exceptionCaught(ctx, cause);
         cause.printStackTrace();
 
+        release(ctx);
+        ctx.close();
+    }
+
+    private void release(ChannelHandlerContext ctx)
+    {
         if (ctx != null)
         {
             Session session = getSession();
@@ -116,7 +123,5 @@ public class Jtt1078Handler extends SimpleChannelInboundHandler<Packet>
                 }
             }
         }
-
-        ctx.close();
     }
 }
